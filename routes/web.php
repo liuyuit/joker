@@ -17,7 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
+Route::get('/hello', function (\Illuminate\Http\Request $request) {
+    if($request->get('session_id')){
+        // 将手机端登陆的 session_id 设置到当前页面的 session 中
+        session()->setId($request->get('session_id'));
+        // 重新读取 session 数据。其实就是将手机端登陆后的 session 内容读取到当前页面的 session 中
+        session()->start();
+        // 这里只是做个提示
+        echo session('login_info.username')." 已通过手机扫码登录";
+    }
     // 首页显示二维码
     return view('hello');
 });

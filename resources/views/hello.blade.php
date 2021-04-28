@@ -37,6 +37,10 @@
     // 随便监听一个事件，这个事件在项目中还不存在，但不影响建立 socket 连接
         .listen('LoginedEvent', (e) => {
             console.log(e);
+            // 从登陆事件广播出来的数据中，取出 session_id 字段
+            var session_id = e.session_id;
+            // 拼接好参数后，跳转到指定页面，也就是当前页面
+            location.href = location.origin+'/hello?session_id='+session_id;
         });
 
     // 显示一个二维码，内容是一个登陆页地址，后面拼接 uuid。这个 uuid 会在后面广播中用到，用来给监听此 uuid 频道的 socket 发送数据
