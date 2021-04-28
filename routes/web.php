@@ -32,6 +32,9 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
     session([
         'login_info' => $request->all(),
     ]);
+    // 触发登录事件
+    event(new \App\Events\LoginedEvent(session('login_info')));
+
     // 返回响应
     return response([
         'code' => 0,

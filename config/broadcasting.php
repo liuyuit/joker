@@ -38,6 +38,10 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
+                // 拦截 pusher 的广播后，转发到目标 ip
+                'host' => '127.0.0.1',
+                // 转发的端口，就是我们之前在 .env 文件中配置的 2020 端口
+                'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
             ],
         ],
 
