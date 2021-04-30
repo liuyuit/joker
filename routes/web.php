@@ -50,3 +50,22 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
         'data' => session('login_info'),
     ]);
 });
+
+Route::get('private/public', function () {
+    return view('private.public');
+});
+
+
+Route::get('private/private', function () {
+    return view('private.private');
+});
+
+
+Route::any('private/sent-public-channel', function(\Illuminate\Http\Request $request) {
+    $request->user();
+    event(new \App\Events\PublicEvent($request->uuid));
+});
+
+Route::any('private/sent-private-channel', function(\Illuminate\Http\Request $request) {
+    event(new \App\Events\PrivateEvent($request->uuid));
+});

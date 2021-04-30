@@ -14,7 +14,8 @@ class BroadcastServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Broadcast::routes();
+        $attribute = ['middleware' => ['resolve_user'],];
+        Broadcast::routes($attribute);
 
         require base_path('routes/channels.php');
     }

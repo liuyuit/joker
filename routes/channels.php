@@ -20,3 +20,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('abcdefg.{uuid}', function () {
     return true;
 });
+
+
+Broadcast::channel('public.{uuid}', function () {
+    return true;
+});
+
+Broadcast::channel('private.{uuid}', function () {
+    return true;
+});
