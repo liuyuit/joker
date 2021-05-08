@@ -16,8 +16,10 @@ class ResolveUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $request->setUserResolver(function () {
+        $uuid = $request->input('uuid');
+        $request->setUserResolver(function () use ($uuid) {
             return [
+                'uuid' => $uuid,
                 'uid' => 1,
                 'username' => 'Jack',
             ];

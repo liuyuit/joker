@@ -26,6 +26,6 @@ Broadcast::channel('public.{uuid}', function () {
     return true;
 });
 
-Broadcast::channel('private.{uuid}', function () {
-    return true;
+Broadcast::channel('private.{uuid}', function ($user, $uuid) {
+    return $user['uuid'] == $uuid;
 });

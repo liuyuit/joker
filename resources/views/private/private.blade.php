@@ -3,13 +3,13 @@
 <head>
     <title>private channel</title>
     <!-- 引入jQuery工具 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="/static/js/pusher/jquery.min.js"></script>
     <!-- 引入二维码工具 -->
     <script src="https://cdn.jsdelivr.net/npm/jquery.qrcode@1.0.3/jquery.qrcode.min.js"></script>
     <!-- 引入laravel-echo工具，其实使用Larave自带的也可以。但是，使用自带的还需要用到node前端构建工具，我这里只简单的演示后端实现过程，就不用node了 -->
-    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.10.0/dist/echo.iife.js"></script>
+    <script src="/static/js/pusher/echo.iife.js"></script>
     <!-- 引入pusher工具，pusher是Laravel-echo底层，Laravel-echo是pusher的一层封装 -->
-    <script src="https://cdn.jsdelivr.net/npm/pusher-js@7.0.3/dist/web/pusher.min.js"></script>
+    <script src="/static/js/pusher/pusher.js"></script>
 </head>
 <body>
 <h1>private channel</h1>
@@ -18,7 +18,7 @@
 <script type="text/javascript">
 
     // 简单模拟一个 uuid 唯一身份码，为了后端广播时，不会广播给错人
-    var uuid = Math.random().toString(36);
+    var uuid = Math.round(Math.random() * 1000000);
 
     // 初始化 laravel-echo 插件
     window.Echo = new Echo({
@@ -31,11 +31,16 @@
         wsPort: 2020,
         // 这个也要加上
         forceTLS: false,
+        auth: {
+            params: {
+                uuid: uuid,
+            },
+         },
     });
 
     Echo.private('private.' + uuid)
         .listen('privateEvent', (e) => {
-            console.log(e);
+            console.log('receive ', e);
         });
 
     $('#private').click(function() {
