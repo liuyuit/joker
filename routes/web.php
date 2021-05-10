@@ -60,6 +60,9 @@ Route::get('private/public', function () {
 Route::get('private/private', function () {
     return view('private.private');
 });
+Route::get('private/websocket-handler', function () {
+    return view('private.websocket-handler');
+});
 
 
 Route::any('private/sent-public-channel', function(\Illuminate\Http\Request $request) {
