@@ -1,5 +1,6 @@
 <?php
 
+use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,3 +70,5 @@ Route::any('private/sent-public-channel', function(\Illuminate\Http\Request $req
 Route::any('private/sent-private-channel', function(\Illuminate\Http\Request $request) {
     event(new \App\Events\PrivateEvent($request->uuid));
 });
+
+WebSocketsRouter::webSocket('/websocket-handler/app/joker', \App\WebSocket\WebSocketHandler::class);

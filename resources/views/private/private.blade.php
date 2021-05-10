@@ -27,6 +27,7 @@
         // 这里要和你在 .env 中配置的 PUSHER_APP_KEY 保持一致
         key: 'joker',
         wsHost: location.hostname,
+        wsPath: '/websocket-handler',
         // 这里是我们在上一步启动 socket 监听的端口
         wsPort: 2020,
         // 这个也要加上
@@ -36,6 +37,9 @@
                 uuid: uuid,
             },
          },
+        params: {
+            key: 'joker',
+        },
     });
 
     Echo.private('private.' + uuid)
